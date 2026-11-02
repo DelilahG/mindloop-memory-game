@@ -1,0 +1,68 @@
+:root {
+  --bg: #0c0c14;
+  --bg-surface: #15151f;
+  --bg-card: #1a1a26;
+  --bg-card-front: #111119;
+  --accent: #a594d0;
+  --accent-hover: #b8a7dd;
+  --accent-muted: #7b6f9e;
+  --accent-dim: #3d3556;
+  --text: #ede8dd;
+  --text-dim: #8a8690;
+  --text-muted: #4a4656;
+  --border: #252535;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.symbol-detail {
+  fill: var(--bg-card-front);
+}
