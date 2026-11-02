@@ -1,0 +1,190 @@
+/* === Multiplayer Game === */
+.mp-game {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+.mp-waiting {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--text-dim);
+  font-size: 16px;
+}
+
+.mp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  gap: 16px;
+}
+
+.mp-scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mp-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.mp-player--active {
+  border-color: var(--accent);
+}
+
+.mp-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mp-player-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mp-player-score {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--accent);
+  min-width: 24px;
+  text-align: center;
+}
+
+.mp-vs {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mp-turn-indicator {
+  text-align: center;
+  padding: 8px 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.mp-disconnect-banner {
+  text-align: center;
+  padding: 10px 16px;
+  background: rgba(220, 160, 40, 0.1);
+  border: 1px solid rgba(220, 160, 40, 0.25);
+  border-radius: 8px;
+  color: #e0b050;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* Result overlay */
+.mp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 20, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mp-result-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.mp-result-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.mp-result--win { color: #70d890; }
+.mp-result--lose { color: #e87070; }
+
+.mp-result-scores {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 16px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.mp-result-score { text-align: center; }
+
+.mp-elo-change {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  margin: 16px 0 24px;
+}
+
+.mp-elo--up { color: #70d890; }
+.mp-elo--down { color: #e87070; }
+
+.mp-result-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.mp-result-actions .btn-primary,
+.mp-result-actions .btn-secondary {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .mp-scoreboard { gap: 8px; }
+  .mp-player-name { max-width: 60px; font-size: 12px; }
+  .mp-player-score { font-size: 16px; }
+  .mp-player { padding: 4px 8px; }
+  .mp-result-card { padding: 32px 20px; }
+  .mp-result-actions { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-overlay, .mp-result-card { animation: none; }
+}

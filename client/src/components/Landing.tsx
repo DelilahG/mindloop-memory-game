@@ -1,11 +1,15 @@
-import { ArrowRight, Brain, Sparkles, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Brain, Sparkles, Heart, Swords } from 'lucide-react';
 import { CardSymbol, Logo } from '../CardSymbols';
+import { useAuth } from '../context/AuthContext';
 
-interface Props {
-  onPlay: () => void;
-}
+export function Landing() {
+  const navigate = useNavigate();
+  const { player } = useAuth();
 
-export function Landing({ onPlay }: Props) {
+  const goSolo = () => navigate('/solo');
+  const goMultiplayer = () => navigate(player ? '/lobby' : '/login');
+
   return (
     <div className="landing">
       <nav className="landing-nav">
@@ -14,13 +18,21 @@ export function Landing({ onPlay }: Props) {
           <span className="logo-text">MindLoop</span>
         </div>
         <div className="nav-links">
-          <button type="button" className="nav-link">Home</button>
-          <button type="button" className="nav-link" onClick={onPlay}>Play</button>
-          <button type="button" className="nav-link">About</button>
+          <button type="button" className="nav-link" onClick={() => navigate('/')}>Home</button>
+          <button type="button" className="nav-link" onClick={goSolo}>Solo</button>
+          <button type="button" className="nav-link" onClick={() => navigate('/leaderboard')}>Leaderboard</button>
         </div>
-        <button type="button" className="btn-primary btn-nav" onClick={onPlay}>
-          Start Game <ArrowRight size={16} />
-        </button>
+        <div className="nav-actions">
+          {player ? (
+            <button type="button" className="btn-primary btn-nav" onClick={() => navigate('/lobby')}>
+              Lobby <ArrowRight size={16} />
+            </button>
+          ) : (
+            <button type="button" className="btn-primary btn-nav" onClick={() => navigate('/login')}>
+              Sign In <ArrowRight size={16} />
+            </button>
+          )}
+        </div>
       </nav>
 
       <main className="landing-main">
@@ -32,9 +44,14 @@ export function Landing({ onPlay }: Props) {
           <p className="hero-subtitle">
             A simple memory game to help you<br />focus, relax, and train your mind.
           </p>
-          <button type="button" className="btn-primary btn-large" onClick={onPlay}>
-            Play Now <ArrowRight size={18} />
-          </button>
+          <div className="landing-cta-group">
+            <button type="button" className="btn-primary btn-large" onClick={goSolo}>
+              Solo Play <ArrowRight size={18} />
+            </button>
+            <button type="button" className="btn-secondary btn-large" onClick={goMultiplayer}>
+              <Swords size={18} /> Multiplayer
+            </button>
+          </div>
           <div className="landing-features">
             <div className="feature">
               <Brain size={20} />

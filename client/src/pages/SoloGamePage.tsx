@@ -1,17 +1,17 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import type { Screen, Difficulty, CardData } from './types';
-import { DIFFICULTY_CONFIG, SYMBOLS } from './types';
-import { createDeck, formatTime } from './game/engine';
-import { SoundManager } from './sounds';
-import { Landing } from './components/Landing';
-import { LevelSelect } from './components/LevelSelect';
-import { GameBoard } from './components/GameBoard';
-import { GameOver } from './components/GameOver';
+import type { Difficulty, CardData } from '../types';
+import { DIFFICULTY_CONFIG, SYMBOLS } from '../types';
+import { createDeck, formatTime } from '../game/engine';
+import { SoundManager } from '../sounds';
+import { LevelSelect } from '../components/LevelSelect';
+import { GameBoard } from '../components/GameBoard';
+import { GameOver } from '../components/GameOver';
 import { ArrowLeft, Clock, RotateCcw, Volume2, VolumeX } from 'lucide-react';
-import './App.css';
 
-export default function App() {
-  const [screen, setScreen] = useState<Screen>('landing');
+type SoloScreen = 'levels' | 'game' | 'complete';
+
+export function SoloGamePage() {
+  const [screen, setScreen] = useState<SoloScreen>('levels');
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [cards, setCards] = useState<CardData[]>([]);
   const [moves, setMoves] = useState(0);
@@ -129,23 +129,12 @@ export default function App() {
     setScreen('levels');
   }, []);
 
-  const goToLanding = useCallback(() => {
-    setIsTimerRunning(false);
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-    setScreen('landing');
-  }, []);
-
   const difficultyIndex = (['easy', 'medium', 'hard', 'expert'] as const).indexOf(difficulty) + 1;
 
   return (
-    <div className="app">
-      {screen === 'landing' && <Landing onPlay={() => setScreen('levels')} />}
-
+    <>
       {screen === 'levels' && (
-        <LevelSelect onSelect={startGame} onBack={goToLanding} />
+        <LevelSelect onSelect={startGame} onBack={() => window.history.back()} />
       )}
 
       {screen === 'game' && (
@@ -199,6 +188,6 @@ export default function App() {
           onBackToMenu={goToMenu}
         />
       )}
-    </div>
+    </>
   );
 }
