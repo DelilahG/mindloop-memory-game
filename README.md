@@ -2,6 +2,14 @@
 
 A multiplayer memory card game with real-time 1v1 matches, Elo rating, and a solo practice mode.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/login.png" alt="Login page" width="380">
+  &nbsp;&nbsp;
+  <img src="screenshots/gameplay.png" alt="Solo gameplay" width="380">
+</p>
+
 ## Features
 
 - **Solo Mode** - Practice memory matching at 4 difficulty levels (no account required)
